@@ -1,43 +1,80 @@
 ﻿#version 300 es
 
-// Sample WebGL 2 shader. This just outputs a green color
-// to indicate WebGL 2 is in use. Notice that WebGL 2 shaders
-// must be written with '#version 300 es' as the very first line
-// (no linebreaks or comments before it!) and have updated syntax.
-
-in mediump vec2 vTex;
-out lowp vec4 outColor;
-
-#ifdef GL_FRAGMENT_PRECISION_HIGH
-#define highmedp highp
-#else
-#define highmedp mediump
-#endif
-
 precision lowp float;
+precision mediump int;
 
+in vec2 vTex;
+out vec4 outColor;
+
+uniform lowp float alphaDither;
+uniform lowp float scale;
 uniform lowp sampler2D samplerFront;
-uniform mediump vec2 srcStart;
-uniform mediump vec2 srcEnd;
-uniform mediump vec2 srcOriginStart;
-uniform mediump vec2 srcOriginEnd;
-uniform mediump vec2 layoutStart;
-uniform mediump vec2 layoutEnd;
-uniform lowp sampler2D samplerBack;
-uniform lowp sampler2D samplerDepth;
-uniform mediump vec2 destStart;
-uniform mediump vec2 destEnd;
-uniform highmedp float seconds;
-uniform mediump vec2 pixelSize;
-uniform mediump float layerScale;
-uniform mediump float layerAngle;
-uniform mediump float devicePixelRatio;
-uniform mediump float zNear;
-uniform mediump float zFar;
+uniform vec2 srcOriginStart;
+uniform vec2 srcOriginEnd;
+uniform vec2 layoutStart;
+uniform vec2 layoutEnd;
 
-//<-- UNIFORMS -->
+const mediump mat4 ptn1 = mat4(0.0, 0.0, 0.0, 0.0,
+							   0.0, 0.0, 1.0, 0.0,
+							   0.0, 0.0, 0.0, 0.0,
+							   1.0, 0.0, 0.0, 0.0);
+
+const mediump mat4 ptn2 = mat4(1.0, 0.0, 1.0, 0.0,
+							   0.0, 0.0, 0.0, 0.0,
+							   1.0, 0.0, 1.0, 0.0,
+							   0.0, 0.0, 0.0, 0.0);
+
+const mediump mat4 ptn3 = mat4(0.0, 0.0, 1.0, 0.0,
+							   0.0, 1.0, 0.0, 1.0,
+							   1.0, 0.0, 0.0, 0.0,
+							   0.0, 1.0, 0.0, 1.0);
+
+const mediump mat4 ptn4 = mat4(1.0, 0.0, 1.0, 0.0,
+						   	   0.0, 1.0, 0.0, 1.0,
+							   1.0, 0.0, 1.0, 0.0,
+							   0.0, 1.0, 0.0, 1.0);
+
+const mediump mat4 ptn5 = mat4(1.0, 1.0, 0.0, 1.0,
+							   1.0, 0.0, 1.0, 0.0,
+							   0.0, 1.0, 1.0, 1.0,
+							   1.0, 0.0, 1.0, 0.0);
+
+const mediump mat4 ptn6 = mat4(0.0, 1.0, 0.0, 1.0,
+							   1.0, 1.0, 1.0, 1.0,
+							   0.0, 1.0, 0.0, 1.0,
+							   1.0, 1.0, 1.0, 1.0);
+
+const mediump mat4 ptn7 = mat4(1.0, 1.0, 1.0, 1.0,
+							   1.0, 1.0, 0.0, 1.0,
+							   1.0, 1.0, 1.0, 1.0,
+							   0.0, 1.0, 1.0, 1.0);
 
 void main(void)
 {
-	outColor = vec4(0.0, 1.0, 0.0, 1.0);
+    vec4 front = texture(samplerFront, vTex);
+
+    vec2 srcOriginSize = srcOriginEnd - srcOriginStart;
+    vec2 n = (vTex - srcOriginStart) / srcOriginSize;
+    vec2 l = mix(layoutStart, layoutEnd, n) - layoutStart;
+    vec2 xy = l;
+
+    int x = int(mod(xy.x / scale, 4.0));
+    int y = int(mod(xy.y / scale, 4.0));
+
+    float factor = 0.0;
+    int pattern = int(8.0 * alphaDither);
+
+    if (pattern == 0) factor = 0.0;
+    if (pattern == 1) factor = ptn1[x][y];
+    if (pattern == 2) factor = ptn2[x][y];
+    if (pattern == 3) factor = ptn3[x][y];
+    if (pattern == 4) factor = ptn4[x][y];
+    if (pattern == 5) factor = ptn5[x][y];
+    if (pattern == 6) factor = ptn6[x][y];
+    if (pattern == 7) factor = ptn7[x][y];
+    if (pattern == 8) factor = 1.0;
+
+    front *= factor;
+
+    outColor = front;
 }

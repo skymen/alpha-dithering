@@ -19,12 +19,12 @@ module.exports = {
   blendsBackground: false,
   usesDepth: false,
   crossSampling: false,
-  preservesOpaqueness: true,
+  preservesOpaqueness: false,
   animated: false,
   mustPredraw: false,
   extendBox: {
-    horizontal: 0,
-    vertical: 0,
+    horizontal: 1,
+    vertical: 1,
   },
   isDeprecated: false,
   parameters: [
@@ -45,14 +45,24 @@ module.exports = {
     }
     */
     {
-      type: "float",
-      id: "property_id",
-      value: 0,
-      uniform: "uPropertyId",
+      type: "percent",
+      id: "alphaDither",
+      value: 1,
+      uniform: "alphaDither",
       // precision: "lowp" // defaults to lowp if omitted
       interpolatable: true,
-      name: "Property Name",
-      desc: "Property Description",
+      name: "Alpha Dither",
+      desc: "Amount of Alpha Dither to apply the image.",
+    },
+    {
+      type: "float",
+      id: "scale",
+      value: 1,
+      uniform: "scale",
+      // precision: "lowp" // defaults to lowp if omitted
+      interpolatable: true,
+      name: "Scale",
+      desc: "The pixel scale.",
     },
   ],
 };
