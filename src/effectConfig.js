@@ -3,7 +3,7 @@ module.exports = {
   addonType: "effect",
   id: "alphadither",
   name: "Alpha Dithering",
-  version: "1.0.0.2",
+  version: "1.0.0.3",
   category:
     // "blend",
     // "distortion",
