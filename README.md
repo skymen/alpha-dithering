@@ -1,4 +1,4 @@
-Link:
+Link to alpha dither shader:
 https://www.construct.net/en/make-games/addons/793/alpha-dithering
 
 To build the addon, run

@@ -3,7 +3,7 @@ module.exports = {
   addonType: "effect",
   id: "effect_id",
   name: "My Effect",
-  version: "1.0.0.0",
+  version: "1.0.0.2",
   category:
     // "blend",
     // "distortion",
