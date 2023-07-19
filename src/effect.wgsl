@@ -122,8 +122,8 @@ fn main(input : FragmentInput) -> FragmentOutput
     var l: vec2<f32> = mix(c3Params.layoutStart, c3Params.layoutEnd, n) - c3Params.layoutStart;
     var xy: vec2<f32> = l;
 
-    var x: i32 = i32(modf(xy.x / shaderParams.scale, 4.0));
-    var y: i32 = i32(modf(xy.y / shaderParams.scale, 4.0));
+    var x: i32 = i32((xy.x / shaderParams.scale) % 4.0);
+    var y: i32 = i32((xy.y / shaderParams.scale) % 4.0);
 
     var factor: f32 = 0.0;
     var pattern: i32 = i32(8.0 * shaderParams.alphaDither);
