@@ -138,7 +138,7 @@ fn main(input : FragmentInput) -> FragmentOutput
     else if (pattern == 7) {factor = ptn7[x][y];}
     else if (pattern == 8) {factor = 1.0;}
 
-    front *= factor;
-
-    return front;
+    var output : FragmentOutput;
+    output.color = front * factor;
+    return output;
 }
