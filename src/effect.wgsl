@@ -21,8 +21,8 @@ fn c3_getDepthUV(fragPos : vec2<f32>, texDepth : texture_depth_2d) -> vec2<f32>
 
 struct ShaderParams {
 
-	alphaDither : f32;
-	scale : f32;
+  alphaDither : f32;
+  scale : f32;
 
 };
 
@@ -79,40 +79,40 @@ var ptn1: mat4x4<f32> = mat4x4<f32>(
     1.0, 0.0, 0.0, 0.0);
 
 var ptn2: mat4x4<f32> = mat4x4<f32>(
-		1.0, 0.0, 1.0, 0.0,
-		0.0, 0.0, 0.0, 0.0,
-		1.0, 0.0, 1.0, 0.0,
-		0.0, 0.0, 0.0, 0.0);
+    1.0, 0.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 0.0,
+    1.0, 0.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 0.0);
 
 var ptn3: mat4x4<f32> = mat4x4<f32>(
-		0.0, 0.0, 1.0, 0.0,
-		0.0, 1.0, 0.0, 1.0,
-		1.0, 0.0, 0.0, 0.0,
-		0.0, 1.0, 0.0, 1.0);
+    0.0, 0.0, 1.0, 0.0,
+    0.0, 1.0, 0.0, 1.0,
+    1.0, 0.0, 0.0, 0.0,
+    0.0, 1.0, 0.0, 1.0);
 
 var ptn4: mat4x4<f32> = mat4x4<f32>(
-		1.0, 0.0, 1.0, 0.0,
-		0.0, 1.0, 0.0, 1.0,
-		1.0, 0.0, 1.0, 0.0,
-		0.0, 1.0, 0.0, 1.0);
+    1.0, 0.0, 1.0, 0.0,
+    0.0, 1.0, 0.0, 1.0,
+    1.0, 0.0, 1.0, 0.0,
+    0.0, 1.0, 0.0, 1.0);
 
 var ptn5: mat4x4<f32> = mat4x4<f32>(
-		1.0, 1.0, 0.0, 1.0,
-		1.0, 0.0, 1.0, 0.0,
-		0.0, 1.0, 1.0, 1.0,
-		1.0, 0.0, 1.0, 0.0);
+    1.0, 1.0, 0.0, 1.0,
+    1.0, 0.0, 1.0, 0.0,
+    0.0, 1.0, 1.0, 1.0,
+    1.0, 0.0, 1.0, 0.0);
 
 var ptn6: mat4x4<f32> = mat4x4<f32>(
-		0.0, 1.0, 0.0, 1.0,
-		1.0, 1.0, 1.0, 1.0,
-		0.0, 1.0, 0.0, 1.0,
-		1.0, 1.0, 1.0, 1.0);
+    0.0, 1.0, 0.0, 1.0,
+    1.0, 1.0, 1.0, 1.0,
+    0.0, 1.0, 0.0, 1.0,
+    1.0, 1.0, 1.0, 1.0);
 
 var ptn7: mat4x4<f32> = mat4x4<f32>(
-		1.0, 1.0, 1.0, 1.0,
-		1.0, 1.0, 0.0, 1.0,
-		1.0, 1.0, 1.0, 1.0,
-		0.0, 1.0, 1.0, 1.0);
+    1.0, 1.0, 1.0, 1.0,
+    1.0, 1.0, 0.0, 1.0,
+    1.0, 1.0, 1.0, 1.0,
+    0.0, 1.0, 1.0, 1.0);
 
 @fragment
 fn main(input : FragmentInput) -> FragmentOutput
@@ -130,15 +130,15 @@ fn main(input : FragmentInput) -> FragmentOutput
     var factor: f32 = 0.0;
     var pattern: i32 = i32(8.0 * shaderParams.alphaDither);
 
-		if (pattern == 0) {factor = 0.0;}
-		elseif (pattern == 1) {factor = ptn1[x][y];}
-		elseif (pattern == 2) {factor = ptn2[x][y];}
-		elseif (pattern == 3) {factor = ptn3[x][y];}
-		elseif (pattern == 4) {factor = ptn4[x][y];}
-		elseif (pattern == 5) {factor = ptn5[x][y];}
-		elseif (pattern == 6) {factor = ptn6[x][y];}
-		elseif (pattern == 7) {factor = ptn7[x][y];}
-		elseif (pattern == 8) {factor = 1.0;}
+    if (pattern == 0) {factor = 0.0;}
+    else if (pattern == 1) {factor = ptn1[x][y];}
+    else if (pattern == 2) {factor = ptn2[x][y];}
+    else if (pattern == 3) {factor = ptn3[x][y];}
+    else if (pattern == 4) {factor = ptn4[x][y];}
+    else if (pattern == 5) {factor = ptn5[x][y];}
+    else if (pattern == 6) {factor = ptn6[x][y];}
+    else if (pattern == 7) {factor = ptn7[x][y];}
+    else if (pattern == 8) {factor = 1.0;}
 
     front *= factor;
 

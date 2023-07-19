@@ -178,7 +178,7 @@ if (supportedRenderers.includes("webgpu")) {
   const effectWgslWithUniforms = effectWgsl.replaceAll(
     "//<-- shaderParams -->",
     `struct ShaderParams {
-	${config.parameters
+  ${config.parameters
     .map((parameter) => {
       return `  ${parameter.uniform} : ${
         parameter.type === "color" ? "vec3<f32>" : "f32"
