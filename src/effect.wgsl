@@ -115,10 +115,10 @@ const ptn7: mat4x4<f32> = mat4x4<f32>(
 @fragment
 fn main(input : FragmentInput) -> FragmentOutput
 {
-    var front: vec4<f32> = textureSample(textureFront, samplerFront, vTex);
+    var front: vec4<f32> = textureSample(textureFront, samplerFront, input.fragUV);
 
     var srcOriginSize: vec2<f32> = c3Params.srcOriginEnd - c3Params.srcOriginStart;
-    var n: vec2<f32> = (vTex - c3Params.srcOriginStart) / srcOriginSize;
+    var n: vec2<f32> = (input.fragUV - c3Params.srcOriginStart) / srcOriginSize;
     var l: vec2<f32> = mix(c3Params.layoutStart, c3Params.layoutEnd, n) - c3Params.layoutStart;
     var xy: vec2<f32> = l;
 
