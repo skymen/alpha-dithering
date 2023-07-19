@@ -65,14 +65,14 @@ void main(void)
     int pattern = int(8.0 * alphaDither);
 
     if (pattern == 0) factor = 0.0;
-    if (pattern == 1) factor = ptn1[x][y];
-    if (pattern == 2) factor = ptn2[x][y];
-    if (pattern == 3) factor = ptn3[x][y];
-    if (pattern == 4) factor = ptn4[x][y];
-    if (pattern == 5) factor = ptn5[x][y];
-    if (pattern == 6) factor = ptn6[x][y];
-    if (pattern == 7) factor = ptn7[x][y];
-    if (pattern == 8) factor = 1.0;
+    else if (pattern == 1) factor = ptn1[x][y];
+    else if (pattern == 2) factor = ptn2[x][y];
+    else if (pattern == 3) factor = ptn3[x][y];
+    else if (pattern == 4) factor = ptn4[x][y];
+    else if (pattern == 5) factor = ptn5[x][y];
+    else if (pattern == 6) factor = ptn6[x][y];
+    else if (pattern == 7) factor = ptn7[x][y];
+    else if (pattern == 8) factor = 1.0;
 
     front *= factor;
 

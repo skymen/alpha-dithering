@@ -130,15 +130,15 @@ fn main(input : FragmentInput) -> FragmentOutput
     var factor: f32 = 0.0;
     var pattern: i32 = i32(8.0 * shaderParams.alphaDither);
 
-		if (pattern == 0) factor = 0.0;
-		if (pattern == 1) factor = ptn1[x][y];
-		if (pattern == 2) factor = ptn2[x][y];
-		if (pattern == 3) factor = ptn3[x][y];
-		if (pattern == 4) factor = ptn4[x][y];
-		if (pattern == 5) factor = ptn5[x][y];
-		if (pattern == 6) factor = ptn6[x][y];
-		if (pattern == 7) factor = ptn7[x][y];
-		if (pattern == 8) factor = 1.0;
+		if (pattern == 0) {factor = 0.0;}
+		elseif (pattern == 1) {factor = ptn1[x][y];}
+		elseif (pattern == 2) {factor = ptn2[x][y];}
+		elseif (pattern == 3) {factor = ptn3[x][y];}
+		elseif (pattern == 4) {factor = ptn4[x][y];}
+		elseif (pattern == 5) {factor = ptn5[x][y];}
+		elseif (pattern == 6) {factor = ptn6[x][y];}
+		elseif (pattern == 7) {factor = ptn7[x][y];}
+		elseif (pattern == 8) {factor = 1.0;}
 
     front *= factor;
 
